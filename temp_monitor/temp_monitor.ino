@@ -1,7 +1,10 @@
+const int buzzerPin = 9;  // Buzzer connected to digital pin 9
+
 void setup() {
   Serial.begin(9600);
   // dht.begin();
   Serial.println("Temperature Monitor Started");
+  pinMode(buzzerPin, OUTPUT);  // Set buzzer pin as output
 }
 
 void loop() {
@@ -14,11 +17,17 @@ void loop() {
   Serial.print(temp);
   Serial.println(" °C");
 
-  if (temp > 28.0) {
+  if (temp > 30.0) {
+    Serial.println("Status: Too Hot!");
+    digitalWrite(buzzerPin, HIGH);  // Turn buzzer ON
+  } else if (temp > 28.0) {
     Serial.println("Warning: Temperature rising!");
+    digitalWrite(buzzerPin, LOW);   // Turn buzzer OFF
   } else {
     Serial.println("Temperature is normal.");
+    digitalWrite(buzzerPin, LOW);   // Turn buzzer OFF
   }
 
   delay(2000); // 2 second delay
 }
+
