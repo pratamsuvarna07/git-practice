@@ -1,33 +1,24 @@
-const int buzzerPin = 9;  // Buzzer connected to digital pin 9
+const int buzzerPin = 9;
 
 void setup() {
   Serial.begin(9600);
-  // dht.begin();
-  Serial.println("Temperature Monitor Started");
-  pinMode(buzzerPin, OUTPUT);  // Set buzzer pin as output
+  pinMode(buzzerPin, OUTPUT);
 }
 
 void loop() {
-  // float temp = dht.readTemperature(); // actual sensor reading
+  float temp = 25.0 + random(-5, 6) * 0.5; // Simulated temp
 
-  // Simulated temperature for testing without sensor
-  float temp = 25.0 + random(-5, 6) * 0.5; // random between 22.5 to 27.5
-
-  Serial.print("Temperature: ");
+  // Send as JSON string
+  Serial.print("{\"temperature\":");
   Serial.print(temp);
-  Serial.println(" °C");
+  Serial.println("}");
 
+  // Buzzer logic
   if (temp > 30.0) {
-    Serial.println("Status: Too Hot!");
-    digitalWrite(buzzerPin, HIGH);  // Turn buzzer ON
-  } else if (temp > 28.0) {
-    Serial.println("Warning: Temperature rising!");
-    digitalWrite(buzzerPin, LOW);   // Turn buzzer OFF
+    digitalWrite(buzzerPin, HIGH);
   } else {
-    Serial.println("Temperature is normal.");
-    digitalWrite(buzzerPin, LOW);   // Turn buzzer OFF
+    digitalWrite(buzzerPin, LOW);
   }
 
-  delay(2000); // 2 second delay
+  delay(2000);
 }
-

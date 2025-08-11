@@ -3,7 +3,7 @@ import { neonCursor } from 'https://unpkg.com/threejs-toys@0.0.8/build/threejs-t
 document.addEventListener('DOMContentLoaded', () => {
   neonCursor({
     el: document.getElementById('app'),
-    shaderPoints: 6,
+    shaderPoints: 60,
     curvePoints: 30,
     curveLerp: 0.9,
     radius1: 3,
